@@ -47,5 +47,5 @@ frontend ruran8wa-frontend-https
 
 backend ruran8wa-backend
         balance roundrobin
-        server 5999-web-01 54.226.17.182:80 check
-        server 5999-web-02 54.85.46.133:80 check
+        server 5967-web-01 54.89.147.123:80 check
+        server 5967-web-02 107.22.129.234:80 check
