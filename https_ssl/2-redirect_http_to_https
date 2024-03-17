@@ -37,7 +37,7 @@ defaults
 
 frontend rurangwacodes_frontEnd
     bind *:80 ssl crt /etc/letsencrypt/live/www.rurangwacodes.tech/www.rurangwacodes.tech.pem
-    mode http
+    http-request set-header X-Forwarded-Proto https
     default_backend rurangwacodes_backEnd
 
 backend rurangwacodes_backEnd
