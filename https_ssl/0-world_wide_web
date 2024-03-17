@@ -1,23 +1,16 @@
 #!/usr/bin/env bash
-# Define a function that takes a string as an argument and returns the third word in the string, which is the record type
-function get_record_type {
-    local record_type=$(echo "$1" | awk '{print $4}')
-    echo "$record_type"
+# print domains and subdomains
+
+print_domain_subdomain () {
+    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
 }
-function get_destination {
-    local destination=$(echo "$1" | awk '{print $5}')
-    echo "$destination"
-}
-domain="$1"
-subdomain="$2"
-if [[ -z "$subdomain" ]]; then
-    subdomains=("www" "lb-01" "web-01" "web-02")
+
+if [ "$#" -eq 2 ]
+then
+    print_domain_subdomain "$2.$1" "$2"
 else
-    subdomains=("$subdomain")
+    print_domain_subdomain "www.$1" "www"
+    print_domain_subdomain "lb-01.$1" "lb-01"
+    print_domain_subdomain "web-01.$1" "web-01"
+    print_domain_subdomain "web-02.$1" "web-02"
 fi
-for subdomain in "${subdomains[@]}"; do
-    record="$(dig "$subdomain.$domain" | grep -A1 "ANSWER SECTION:" |awk 'NR==2')"
-    record_type=$(get_record_type "$record")
-    destination=$(get_destination "$record")
-    echo "The subdomain $subdomain is a $record_type record and points to $destination"
-done
