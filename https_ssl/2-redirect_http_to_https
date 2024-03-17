@@ -35,7 +35,7 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 frontend rurangwacodes-frontend
-        bind *:80
+        bind *:80 ssl crt /etc/letsencrypt/live/www.rurangwacodes.tech/www.rurangwacodes.tech.pem
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
