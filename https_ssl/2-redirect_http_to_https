@@ -40,12 +40,12 @@ frontend rurangwacodes_frontEnd
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
-        default_backend rurangwacodes-backEnd
+        default_backend rurangwacodes_backEnd
 
 frontend rurangwacodes-frontEnd-https
         bind *:443 ssl crt /etc/letsencrypt/live/www.rurangwacodes.tech/www.rurangwacodes.tech.pem
         http-request set-header X-Forwarded-Proto https
-        default_backend rurangwacodes-backEnd
+        default_backend rurangwacodes_backEnd
 
 backend rurangwacodes_backEnd
     balance roundrobin
