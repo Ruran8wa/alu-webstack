@@ -35,8 +35,8 @@ defaults
 
 backend my_servers
 	balance roundrobin
-	server 5684-web-01 54.221.116.64 check port 80
-	server 5684-web-02 54.90.173.18 check port 80
+	server 5684-web-01 54.89.147.123 check port 80
+	server 5684-web-02 107.22.129.234 check port 80
 
 backend letsencrypt-backend
 	mode http
