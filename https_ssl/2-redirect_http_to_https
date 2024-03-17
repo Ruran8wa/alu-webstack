@@ -35,12 +35,12 @@ defaults
 
 backend my_servers
 	balance roundrobin
-	server 5684-web-01 54.89.147.123 check port 80
-	server 5684-web-02 107.22.129.234 check port 80
+	server 5967-web-01 54.89.147.123 check port 80
+	server 5967-web-02 107.22.129.234 check port 80
 
 backend letsencrypt-backend
 	mode http
-	server letsencrypt-server 10.250.31.119:8080 
+	server letsencrypt-server 3.82.24.250:8080 
 
 frontend haproxy_inbound
 	bind *:80
